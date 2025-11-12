@@ -21,9 +21,9 @@ public class Task {
     private boolean completed = false;
 
     @Column(updatable = false)
-    private LocalDateTime created = LocalDateTime.now();
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    private LocalDateTime updated = LocalDateTime.now();
+    private LocalDateTime updatedAt = LocalDateTime.now();
 
     public Task() {}
 
@@ -38,6 +38,61 @@ public class Task {
         return id;
     }
 
+    public void setId(Long id){
+        this.id = id;
+    }
 
+    public String getTitle(){
+        return title;
+    }
+
+    public void setTitle(String title){
+        this.title = title;
+    }
+
+    public String getDescription(){
+        return description;
+    }
+
+    public void setDescription(String description){
+        this.description = description;
+    }
+
+    public boolean isCompleted(){
+        return completed;
+    }
+
+    public void setCompleted(boolean completed){
+        this.completed = completed;
+    }
+
+    public LocalDateTime getCreated(){
+        return createdAt;
+    }
+
+    public void SetCreated(LocalDateTime created){
+        this.createdAt = created;
+    }
+
+    public LocalDateTime getUpdated(){
+        return updatedAt;
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", completed=" + completed +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
 
 }
