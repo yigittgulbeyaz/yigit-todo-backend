@@ -2,7 +2,9 @@ package todo.app.yigit.demo.service;
 
 import todo.app.yigit.demo.dto.TaskResponse;
 import todo.app.yigit.demo.model.Task;
+
 import java.util.List;
+
 public interface TaskService {
 
     // Create a new task

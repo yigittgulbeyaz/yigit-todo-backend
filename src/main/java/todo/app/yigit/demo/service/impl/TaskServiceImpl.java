@@ -5,7 +5,11 @@ import todo.app.yigit.demo.dto.TaskResponse;
 import todo.app.yigit.demo.model.Task;
 import todo.app.yigit.demo.repository.TaskRepository;
 import todo.app.yigit.demo.service.TaskService;
+import todo.app.yigit.demo.exception.TaskNotFoundException;
+
+
 import java.util.List;
+
 @Service
 public class TaskServiceImpl implements TaskService {
 
@@ -32,14 +36,14 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TaskResponse getTaskById(Long id) {
         Task task = taskRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Task not found with id " + id));
+                .orElseThrow(() -> new TaskNotFoundException(id));
         return toResponse(task);
     }
 
     @Override
     public TaskResponse updateTask(Long id, Task request) {
         Task task = taskRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Task not found with id " + id));
+                .orElseThrow(() -> new TaskNotFoundException(id));
 
         task.setTitle(request.getTitle());
         task.setDescription(request.getDescription());
@@ -52,10 +56,11 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void deleteTask(Long id) {
         if (!taskRepository.existsById(id)) {
-            throw new RuntimeException("Task not found with id " + id);
+            throw new TaskNotFoundException(id);
         }
         taskRepository.deleteById(id);
     }
+
 
     private TaskResponse toResponse(Task task) {
         return new TaskResponse(

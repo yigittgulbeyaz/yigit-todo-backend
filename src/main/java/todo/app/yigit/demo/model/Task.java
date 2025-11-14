@@ -1,4 +1,5 @@
 package todo.app.yigit.demo.model;
+
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -32,7 +33,7 @@ public class Task {
         this.completed = completed;
     }
 
-    //Getters and Setters
+    // Getters & Setters
     public Long getId() {
         return id;
     }
@@ -69,12 +70,16 @@ public class Task {
         return createdAt;
     }
 
-    public void SetCreated(LocalDateTime created){
+    public void setCreated(LocalDateTime created){
         this.createdAt = created;
     }
 
     public LocalDateTime getUpdated(){
         return updatedAt;
+    }
+
+    public void setUpdated(LocalDateTime updated){
+        this.updatedAt = updated;
     }
 
     @PreUpdate
@@ -93,5 +98,4 @@ public class Task {
                 ", updatedAt=" + updatedAt +
                 '}';
     }
-
 }
