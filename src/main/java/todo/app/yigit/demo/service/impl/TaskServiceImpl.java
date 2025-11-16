@@ -1,12 +1,14 @@
+
 package todo.app.yigit.demo.service.impl;
 
 import org.springframework.stereotype.Service;
+import todo.app.yigit.demo.dto.TaskRequest;
 import todo.app.yigit.demo.dto.TaskResponse;
+import todo.app.yigit.demo.dto.mapper.TaskMapper;
+import todo.app.yigit.demo.exception.TaskNotFoundException;
 import todo.app.yigit.demo.model.Task;
 import todo.app.yigit.demo.repository.TaskRepository;
 import todo.app.yigit.demo.service.TaskService;
-import todo.app.yigit.demo.exception.TaskNotFoundException;
-
 
 import java.util.List;
 
@@ -19,57 +21,42 @@ public class TaskServiceImpl implements TaskService {
         this.taskRepository = taskRepository;
     }
 
+    private Task findOrFail(Long id) {
+        return taskRepository.findById(id)
+                .orElseThrow(() -> new TaskNotFoundException(id));
+    }
+
     @Override
-    public TaskResponse createTask(Task task) {
+    public TaskResponse createTask(TaskRequest request) {
+        Task task = TaskMapper.toEntity(request);
         Task saved = taskRepository.save(task);
-        return toResponse(saved);
+        return TaskMapper.toResponse(saved);
     }
 
     @Override
     public List<TaskResponse> getAllTasks() {
         return taskRepository.findAll()
                 .stream()
-                .map(this::toResponse)
+                .map(TaskMapper::toResponse)
                 .toList();
     }
 
     @Override
     public TaskResponse getTaskById(Long id) {
-        Task task = taskRepository.findById(id)
-                .orElseThrow(() -> new TaskNotFoundException(id));
-        return toResponse(task);
+        return TaskMapper.toResponse(findOrFail(id));
     }
 
     @Override
-    public TaskResponse updateTask(Long id, Task request) {
-        Task task = taskRepository.findById(id)
-                .orElseThrow(() -> new TaskNotFoundException(id));
-
-        task.setTitle(request.getTitle());
-        task.setDescription(request.getDescription());
-        task.setCompleted(request.isCompleted());
-
+    public TaskResponse updateTask(Long id, TaskRequest request) {
+        Task task = findOrFail(id);
+        TaskMapper.updateEntity(task, request);
         Task updated = taskRepository.save(task);
-        return toResponse(updated);
+        return TaskMapper.toResponse(updated);
     }
 
     @Override
     public void deleteTask(Long id) {
-        if (!taskRepository.existsById(id)) {
-            throw new TaskNotFoundException(id);
-        }
-        taskRepository.deleteById(id);
-    }
-
-
-    private TaskResponse toResponse(Task task) {
-        return new TaskResponse(
-                task.getId(),
-                task.getTitle(),
-                task.getDescription(),
-                task.isCompleted(),
-                task.getCreated(),
-                task.getUpdated()
-        );
+        Task task = findOrFail(id);
+        taskRepository.delete(task);
     }
 }

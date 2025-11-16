@@ -14,7 +14,7 @@ public class Task {
     @Column(nullable = false, length = 500)
     private String title;
 
-    @Column(length = 500)
+    @Column(length = 1000)
     private String description;
 
     @Column(nullable = false)
@@ -27,75 +27,62 @@ public class Task {
 
     public Task() {}
 
-    public Task(String title, String description, boolean completed){
+    public Task(String title, String description, boolean completed) {
         this.title = title;
         this.description = description;
         this.completed = completed;
     }
 
-    // Getters & Setters
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id){
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getTitle(){
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title){
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description){
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public boolean isCompleted(){
+    public boolean isCompleted() {
         return completed;
     }
 
-    public void setCompleted(boolean completed){
+    public void setCompleted(boolean completed) {
         this.completed = completed;
     }
 
-    public LocalDateTime getCreated(){
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreated(LocalDateTime created){
-        this.createdAt = created;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdated(){
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdated(LocalDateTime updated){
-        this.updatedAt = updated;
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @PreUpdate
     protected void onUpdate() {
         this.updatedAt = LocalDateTime.now();
-    }
-
-    @Override
-    public String toString() {
-        return "Task{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", completed=" + completed +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
     }
 }
