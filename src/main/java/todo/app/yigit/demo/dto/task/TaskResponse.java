@@ -1,4 +1,4 @@
-package todo.app.yigit.demo.dto;
+package todo.app.yigit.demo.dto.task;
 
 import java.time.LocalDateTime;
 

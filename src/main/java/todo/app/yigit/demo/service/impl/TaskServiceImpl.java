@@ -2,8 +2,8 @@
 package todo.app.yigit.demo.service.impl;
 
 import org.springframework.stereotype.Service;
-import todo.app.yigit.demo.dto.TaskRequest;
-import todo.app.yigit.demo.dto.TaskResponse;
+import todo.app.yigit.demo.dto.task.TaskRequest;
+import todo.app.yigit.demo.dto.task.TaskResponse;
 import todo.app.yigit.demo.dto.mapper.TaskMapper;
 import todo.app.yigit.demo.exception.TaskNotFoundException;
 import todo.app.yigit.demo.model.Task;

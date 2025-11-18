@@ -1,4 +1,4 @@
-package todo.app.yigit.demo.dto;
+package todo.app.yigit.demo.dto.task;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

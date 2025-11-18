@@ -4,8 +4,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import todo.app.yigit.demo.dto.TaskRequest;
-import todo.app.yigit.demo.dto.TaskResponse;
+import todo.app.yigit.demo.dto.task.TaskRequest;
+import todo.app.yigit.demo.dto.task.TaskResponse;
 import todo.app.yigit.demo.service.TaskService;
 
 import java.util.List;

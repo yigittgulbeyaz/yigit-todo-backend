@@ -1,7 +1,7 @@
 package todo.app.yigit.demo.service;
 
-import todo.app.yigit.demo.dto.TaskRequest;
-import todo.app.yigit.demo.dto.TaskResponse;
+import todo.app.yigit.demo.dto.task.TaskRequest;
+import todo.app.yigit.demo.dto.task.TaskResponse;
 
 import java.util.List;
 
